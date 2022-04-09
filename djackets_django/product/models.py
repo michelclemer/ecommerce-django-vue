@@ -49,13 +49,16 @@ class Product(models.Model):
             return 'http://127.0.0.1:8000' + self.image.url
         else:
             if self.image:
+                print("aqui = ",self.thumbnail)
                 self.thumbnail = self.make_thumbnail(self.image)
+                
                 self.save()
 
                 return 'http://127.0.0.1:8000' + self.thumbnail.url
             else:
                 return ''
     def make_thumbnail(self, image, size=(300, 200)):
+        print("Imagem: ", image)
         img = Image.open(image)
         img.convert('RGB')
         img.thumbnail(size)
